@@ -25,6 +25,17 @@ h3 {
   width: 100%;
   padding: 10px;
 }
+.btns > button{
+  border: none;
+  padding:10px 30px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.5s;
+}
+.btns > button:hover{
+  background-color: #000;
+  color: #Fff;
+}
 #result,
 #bonus {
   display: flex;

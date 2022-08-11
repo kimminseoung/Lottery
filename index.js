@@ -1,11 +1,14 @@
 const result = document.querySelector("#result");
 const bonus = document.querySelector("#bonus");
+const st = document.querySelector("#start");
+const rst = document.querySelector("#reset");
 
 const numbers = Array(45)
   .fill()
   .map((ele, index) => {
     return index + 1;
   }); // 1~45 숫자 생성
+
 const shuffle = [];
 
 while (numbers.length > 0) {
@@ -40,12 +43,25 @@ function color(number, tag) {
   }
 } // 숫자 범위 별 공 색깔 결정하기
 
-for (let i = 0; i < 6; i++) {
+function callNum() {
+  for (let i = 0; i < 6; i++) {
+    setTimeout(() => {
+      numGen(lotterNum[i], result);
+    }, (i + 1) * 1000);
+  }
+
   setTimeout(() => {
-    numGen(lotterNum[i], result);
-  }, (i + 1) * 800);
+    numGen(bonusNum, bonus);
+  }, 7000);
 }
 
-setTimeout(() => {
-  numGen(bonusNum, bonus);
-}, 7000);
+st.addEventListener("click", () => {
+  callNum();
+  st.disabled = "true";
+});
+
+rst.addEventListener("click", () => {
+  result.textContent = "";
+  bonus.textContent = "";
+  callNum();
+});
