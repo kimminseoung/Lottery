@@ -5,7 +5,7 @@ const numbers = Array(45)
   .fill()
   .map((ele, index) => {
     return index + 1;
-  });
+  }); // 1~45 숫자 생성
 const shuffle = [];
 
 while (numbers.length > 0) {
@@ -13,7 +13,7 @@ while (numbers.length > 0) {
   const spliceArray = numbers.splice(Ramdom, 1);
   const value = spliceArray[0];
   shuffle.push(value);
-}
+} // 7개의 숫자 뽑기
 
 const lotterNum = shuffle.slice(0, 6).sort((a, b) => a - b);
 const bonusNum = shuffle[6];
@@ -38,7 +38,7 @@ function color(number, tag) {
   } else {
     tag.style.backgroundColor = "#0097e6";
   }
-}
+} // 숫자 범위 별 공 색깔 결정하기
 
 for (let i = 0; i < 6; i++) {
   setTimeout(() => {
