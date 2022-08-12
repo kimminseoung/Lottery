@@ -1,11 +1,11 @@
 const result = document.querySelector("#result");
 const bonus = document.querySelector("#bonus");
-const st = document.querySelector("#start");
-const rst = document.querySelector("#reset");
+const startBtn = document.querySelector("#start");
+const reSetBtn = document.querySelector("#reset");
 
 let shuffle = [];
-
-
+let lotterNum;
+let bonusNum;
 const lotteryNumGen = () => {
   let numbers = Array(45)
     .fill()
@@ -19,11 +19,9 @@ const lotteryNumGen = () => {
     const value = spliceArray[0];
     shuffle.push(value);
   }
-}
-(lotteryNumGen)()
-  
-let lotterNum = shuffle.slice(0, 6).sort((a, b) => a - b);
-let bonusNum = shuffle[6];
+  lotterNum = shuffle.slice(0, 6).sort((a, b) => a - b);
+  bonusNum = shuffle[6];
+};
 
 function numGen(number, $target) {
   const $ball = document.createElement("div");
@@ -57,16 +55,19 @@ function callNum() {
     numGen(bonusNum, bonus);
   }, 1350);
 }
-
-st.addEventListener("click", () => {
+reSetBtn.disabled = true;
+startBtn.addEventListener("click", () => {
+  lotteryNumGen();
   callNum();
+  startBtn.disabled = true;
+  reSetBtn.disabled = false;
 });
-rst.addEventListener("click", () => {
+
+console.log(lotterNum, bonusNum);
+reSetBtn.addEventListener("click", () => {
   result.textContent = "";
   bonus.textContent = "";
   shuffle = [];
-  lotteryNumGen()
-  lotterNum = shuffle.slice(0, 6).sort((a, b) => a - b);
-  bonusNum = shuffle[6];
+  lotteryNumGen();
   callNum();
 });
