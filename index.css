@@ -67,5 +67,6 @@ h3 {
   }
   .ball {
     margin: 0 10px;
+    font-size: 16px;
   }
 }

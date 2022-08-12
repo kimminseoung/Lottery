@@ -3,23 +3,27 @@ const bonus = document.querySelector("#bonus");
 const st = document.querySelector("#start");
 const rst = document.querySelector("#reset");
 
-const numbers = Array(45)
-  .fill()
-  .map((ele, index) => {
-    return index + 1;
-  }); // 1~45 숫자 생성
+let shuffle = [];
 
-const shuffle = [];
 
-while (numbers.length > 0) {
-  const Ramdom = Math.floor(Math.random() * numbers.length);
-  const spliceArray = numbers.splice(Ramdom, 1);
-  const value = spliceArray[0];
-  shuffle.push(value);
-} // 7개의 숫자 뽑기
+const lotteryNumGen = () => {
+  let numbers = Array(45)
+    .fill()
+    .map((ele, index) => {
+      return index + 1;
+    }); // 1~45 숫자 생성
 
-const lotterNum = shuffle.slice(0, 6).sort((a, b) => a - b);
-const bonusNum = shuffle[6];
+  while (numbers.length > 0) {
+    const Ramdom = Math.floor(Math.random() * numbers.length);
+    const spliceArray = numbers.splice(Ramdom, 1);
+    const value = spliceArray[0];
+    shuffle.push(value);
+  }
+}
+(lotteryNumGen)()
+  
+let lotterNum = shuffle.slice(0, 6).sort((a, b) => a - b);
+let bonusNum = shuffle[6];
 
 function numGen(number, $target) {
   const $ball = document.createElement("div");
@@ -47,21 +51,22 @@ function callNum() {
   for (let i = 0; i < 6; i++) {
     setTimeout(() => {
       numGen(lotterNum[i], result);
-    }, (i + 1) * 1000);
+    }, (i + 1) * 200);
   }
-
   setTimeout(() => {
     numGen(bonusNum, bonus);
-  }, 7000);
+  }, 1350);
 }
 
 st.addEventListener("click", () => {
   callNum();
-  st.disabled = "true";
 });
-
 rst.addEventListener("click", () => {
   result.textContent = "";
   bonus.textContent = "";
+  shuffle = [];
+  lotteryNumGen()
+  lotterNum = shuffle.slice(0, 6).sort((a, b) => a - b);
+  bonusNum = shuffle[6];
   callNum();
 });
