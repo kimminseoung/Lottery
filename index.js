@@ -21,7 +21,7 @@ const lotteryNumGen = () => {
   }
   lotterNum = shuffle.slice(0, 6).sort((a, b) => a - b);
   bonusNum = shuffle[6];
-};
+}; // 랜덤하게 숫자 뽑기
 
 function numGen(number, $target) {
   const $ball = document.createElement("div");
@@ -29,7 +29,7 @@ function numGen(number, $target) {
   color(number, $ball);
   $ball.textContent = number;
   $target.appendChild($ball);
-}
+}; // 공 생성
 
 function color(number, tag) {
   if (number < 10) {
